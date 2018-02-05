@@ -42,6 +42,22 @@
 				margin: 5px;
 			}
 		</style>
+		<script type="text/javascript">
+			function tradeCalc()
+			{
+				//document.getElementById('sellResult').innerHTML = '';
+				var numPrice = new Number(document.getElementById('txtPrice').value);
+				var numStopPer = new Number(document.getElementById('txtStopPer').value);
+				var numTakePer = new Number(document.getElementById('txtTakePer').value);
+				document.getElementById('tradeStop').innerHTML = (txtPrice - (txtPrice / 100 * numStopPer)).toFixed(5);
+				document.getElementById('tradeTake').innerHTML = (txtPrice + (txtPrice / 100 * numTakePer)).toFixed(5);
+			}
+			window.onload=function()
+			{
+				document.getElementById('btnCalc').onclick = tradeCalc;
+			}
+		</script>
+		<script type="text/javascript" src="https://s3.tradingview.com/tv.js" />
 	</head>
 	<body>
 		<input type="text" id="txtPrice" size="3" />
@@ -56,9 +72,9 @@
 		<button id="btnCalc">calc
 		</button>
 		<br />
-		<div id="resultStop">#
+		<div id="tradeStop">#
 		</div>
-		<div id="resultTake">#
+		<div id="tradeTake">#
 		</div>
 	</body>
 </html>
