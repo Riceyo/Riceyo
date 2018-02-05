@@ -49,8 +49,8 @@
 				var numPrice = new Number(document.getElementById('txtPrice').value);
 				var numStopPer = new Number(document.getElementById('txtStopPer').value);
 				var numTakePer = new Number(document.getElementById('txtTakePer').value);
-				document.getElementById('tradeStop').innerHTML = (txtPrice - (txtPrice / 100 * numStopPer)).toFixed(5);
-				document.getElementById('tradeTake').innerHTML = (txtPrice + (txtPrice / 100 * numTakePer)).toFixed(5);
+				document.getElementById('resStop').innerHTML = (txtPrice - (txtPrice / 100 * numStopPer)).toFixed(5);
+				document.getElementById('resTake').innerHTML = (txtPrice + (txtPrice / 100 * numTakePer)).toFixed(5);
 			}
 			window.onload=function()
 			{
@@ -72,9 +72,9 @@
 		<button id="btnCalc">calc
 		</button>
 		<br />
-		<div id="tradeStop">#
+		<div id="resStop">#
 		</div>
-		<div id="tradeTake">#
+		<div id="resTake">#
 		</div>
 	</body>
 </html>
