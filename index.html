@@ -77,8 +77,8 @@
          	var numPrice = new Number(document.getElementById('txtPrice').value);
          	var numStopPer = new Number(document.getElementById('txtStopPer').value);
          	var numTakePer = new Number(document.getElementById('txtTakePer').value);
-         	document.getElementById('resStop').innerHTML = (numPrice - (numPrice / 100 * numStopPer)).toFixed(6);
-         	document.getElementById('resTake').innerHTML = (numPrice + (numPrice / 100 * numTakePer)).toFixed(6);
+         	document.getElementById('resStop').innerHTML = (numPrice - (numPrice / 100 * numStopPer)).toFixed(3);
+         	document.getElementById('resTake').innerHTML = (numPrice + (numPrice / 100 * numTakePer)).toFixed(3);
          }
          window.onload=function()
          {
@@ -92,8 +92,8 @@
          <div class="leftcol">
 			<table>
 				<tr>
-					<td width="120"><input type="text" id="txtPrice" size="5" /> price</th>
-					<td width="150"></th>
+					<td width="110"><input type="text" id="txtPrice" size="5" /> price</th>
+					<td width="120"></th>
 					<td rowspan="4" valign="top">
 						<a href="https://coinmarketcap.com/">coinmarketcap<a/><br />
 						<a href="https://www.tradingview.com/">tradingview<a/><br />
