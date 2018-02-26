@@ -9,10 +9,6 @@
       <meta name="robots" content="nofollow, noarchive, notranslate" />
       <link rel="shortcut icon" href="crypto.png" />
       <style type="text/css">
-		.rssdog
-		{
-		font-size: 20px;
-		}
          body
          {
          color: black;
@@ -89,7 +85,15 @@
          	document.getElementById('btnCalc').onclick = tradeCalc;
          }
       </script>
-      <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+      <script type="text/javascript">
+         function twitSearch()
+         {
+         	var varTwitQuery = document.getElementById('txtTwitQuery').value.toString();
+			window.open("https://twitter.com/search?l=en&f=tweets&vertical=default&q=-filter%3Alinks%20" + varTwitQuery);
+		}
+
+      </script>
+	  <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
    </head>
    <body>
       <div class="row">
@@ -98,17 +102,17 @@
 				<tr>
 					<td width="110"><input type="text" id="txtPrice" size="5" /> price</th>
 					<td width="90"></th>
-					<td rowspan="4" width="135" valign="top">
+					<td rowspan="3" width="135" valign="top">
 						<a href="https://coinmarketcap.com/">coinmarketcap<a/><br />
 						<a href="https://www.tradingview.com/">tradingview<a/><br />
 						<a href="https://coinwink.com//">coinwink<a/><br />
 						</th>
-					<td rowspan="4" width="90" valign="top">
+					<td rowspan="3" width="90" valign="top">
 						<a href="https://www.binance.com/">binance<a/><br />
 						<a href="https://www.kucoin.com/">kucoin<a/><br />
 						<a href="https://www.gdax.com/">gdax<a/><br />
 						</th>
-					<td rowspan="4" width="80" valign="top">
+					<td rowspan="3" width="80" valign="top">
 						<a href="https://www.twitch.tv/cryptoworldnews">twitch<a/><br />
 						<a href="https://discordapp.com/">discord<a/><br />
 						<a href="https://web.telegram.org/">telegram<a/><br />
@@ -125,6 +129,19 @@
 				<tr>
 					<td><button id="btnCalc">calc</button><br /><br /></td>
 					<td></td>
+					<td colspan="3">
+					<input type="text" id="txtTwitQuery" size="15" value="$" /> <button id="butTwitQuery" onclick="twitSearch()">twitter search</button>
+					<script>
+					var input = document.getElementById("txtTwitQuery");
+					input.addEventListener("keyup", function(event) {
+						event.preventDefault();
+						if (event.keyCode === 13)
+						{
+							document.getElementById("butTwitQuery").click();
+						}
+					});
+					</script>
+					</td>
 				</tr>
 			</table>
             <script type="text/javascript">
