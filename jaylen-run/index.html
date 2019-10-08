@@ -1,1 +1,127 @@
-test
+<body>
+
+    <head>
+        <style>
+            body{
+            background-image: url('background.gif');
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            overflow: hidden;
+            }
+        </style>
+    </head>
+
+    <div style="position: relative;">
+		<canvas id="canvasJaylen" width="100%" height="100%" style="position: absolute; left: 0; top: 0;"></canvas>
+        <canvas id="canvasItem" width="100%" height="100%" style="position: absolute; left: 0; top: 0;"></canvas>        
+    </div>
+
+    <script>
+		
+		var canvasJaylen = document.getElementById("canvasJaylen");
+		var contextJaylen = canvasJaylen.getContext('2d');
+		canvasJaylen.width = window.innerWidth;
+		canvasJaylen.height = window.innerHeight;
+
+		var canvasItem = document.getElementById("canvasItem");
+		var contextItem = canvasItem.getContext('2d');
+		canvasItem.width = window.innerWidth;
+		canvasItem.height = window.innerHeight;
+		
+		var jaylen = ['jaylenstand.png', 'jaylenrun1.png', 'jaylenrun2.png'];		
+        var frame = 0;        
+        var frames = [];
+        
+        function jaylenRun(go) {
+			if (go = 1) {
+				for (var loop = 0; loop < jaylen.length; loop++) {
+					frames.push(new Image());
+					frames[loop].src = jaylen[loop];
+				} 
+				setInterval(jaylenAnimate, 110);
+			} else {
+				frames.push(new Image());
+				frames[loop].src = "#";
+			}
+		};
+		        
+        function jaylenAnimate () {
+			contextJaylen.clearRect(0, 0, canvasJaylen.width, canvasJaylen.height);
+			contextJaylen.drawImage(frames[frame], 150, window.innerHeight / 1.40);
+			frame = (frame + 1) % frames.length;
+		};
+		
+		jaylenRun(1);
+		
+		function sleep(ms) {
+			return new Promise(resolve => setTimeout(resolve, ms));
+		};
+		
+		async function jaylenJump() {
+			//jaylenRun(0);
+			contextJaylen.clearRect(0, 0, canvasJaylen.width, canvasJaylen.height);
+            contextJaylen.drawImage(frames[frame], 150, window.innerHeight / 1.45);
+			frame = (frame + 1) % frames.length;
+			await sleep(25);
+            contextJaylen.clearRect(0, 0, canvasJaylen.width, canvasJaylen.height);
+            contextJaylen.drawImage(frames[frame], 150, window.innerHeight / 1.50);
+			frame = (frame + 1) % frames.length;
+			await sleep(25);
+			contextJaylen.clearRect(0, 0, canvasJaylen.width, canvasJaylen.height);
+            contextJaylen.drawImage(frames[frame], 150, window.innerHeight / 1.55);
+			frame = (frame + 1) % frames.length;
+			await sleep(25);
+            contextJaylen.clearRect(0, 0, canvasJaylen.width, canvasJaylen.height);
+            contextJaylen.drawImage(frames[frame], 150, window.innerHeight / 1.60);
+			frame = (frame + 1) % frames.length;
+			await sleep(25);
+			//jaylenRun(1);
+           };
+        
+        window.addEventListener('keydown', onkeypress, true);
+        
+        function onkeypress(evt) {
+			switch (evt.keyCode) {
+				case 32:
+					jaylenJump();
+					break;
+			}
+		};	
+
+        function itemScroll() {
+		
+			var itemImage = new Image();
+			itemImage.onload = itemAnimate();
+			var itemImages = [
+				"item1.png"
+				,"item2.png"
+				,"item3.png"
+				,"item5.png"
+				,"item7.png"
+				,"itema.png"
+				,"itemb.png"
+				,"itemc.png"
+				,"itemr.png"
+				,"itemj.png"
+			];
+			var randomIndex = Math.floor(Math.random() * itemImages.length);
+			itemImage.src = itemImages[randomIndex];
+			var itemX = window.innerWidth;
+			var itemY = window.innerHeight - (window.innerHeight / 100 * 50);
+			var itemSpeed = 0;
+			
+			function itemAnimate() {
+				requestAnimationFrame(itemAnimate);
+				itemSpeed += 12;
+				var newX = itemX - itemSpeed;
+				contextItem.clearRect(0, 0, canvasItem.width, canvasItem.height);
+				contextItem.drawImage(itemImage, newX, itemY);
+			};
+        
+        };
+		
+		setInterval(itemScroll, 2500);
+        
+    </script>
+
+</body>
