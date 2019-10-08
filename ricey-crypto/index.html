@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="UTF-8" />
+      <title>
+         Ricey Crypto
+      </title>
+      <meta name="author" content="Richmond Rice" />
+      <meta name="robots" content="nofollow, noarchive, notranslate" />
+      <link rel="shortcut icon" href="crypto.png" />
+      <style type="text/css">
+         body
+         {
+         color: black;
+         align: left;
+         font-family: arial;
+         //font-size: 12px;
+         //position: absolute;
+         background-color: rgb(247, 247, 247);
+         margin: 0px;
+         }
+         a:link
+         {
+         color: blue;
+         text-decoration: none;
+         }
+         a:visited
+         {
+         color: blue;
+         text-decoration: none;
+         }
+         a:hover {
+         color: blue;
+         text-decoration: none;
+         }
+         a:active
+         {
+         color: blue;
+         text-decoration: none;
+         }
+         div
+         {
+         }
+         .leftcol {
+         float: left;
+         padding: 10px;
+         }
+         .rightcol {
+         float: right;
+         padding: 10px;
+         align:right;
+         }
+         a.twitter-timeline {
+         display: inline-block;
+         padding: 6px 12px 6px 30px;
+         margin: 10px 0;
+         border: #ccc solid 1px;
+         border-radius: 3px;
+         background: #f8f8f8;
+         background-size: 1em 1em;
+         font: normal 12px/18px Helvetica, Arial, sans-serif;
+         color: #333;
+         white-space: nowrap;
+         }
+         a.twitter-timeline:hover,
+         a.twitter-timeline:focus {
+         background-color: #dedede;
+         }
+         a.twitter-timeline:focus {
+         outline: none;
+         border-color: #0089cb;
+         }
+      </style>
+      <script type="text/javascript">
+         function tradeCalc()
+         {
+         	var numPrice = new Number(document.getElementById('txtPrice').value);
+         	var numStopPer = new Number(document.getElementById('txtStopPer').value);
+         	var numTakePer = new Number(document.getElementById('txtTakePer').value);
+         	document.getElementById('resStop').innerHTML = (numPrice - (numPrice / 100 * numStopPer)).toFixed(3);
+         	document.getElementById('resTake').innerHTML = (numPrice + (numPrice / 100 * numTakePer)).toFixed(3);
+         }
+         window.onload=function()
+         {
+         	document.getElementById('btnCalc').onclick = tradeCalc;
+         }
+      </script>
+      <script type="text/javascript">
+         function twitSearch()
+         {
+         	var varTwitQuery = document.getElementById('txtTwitQuery').value.toString();
+			window.open("https://twitter.com/search?l=en&f=tweets&vertical=default&q=-filter%3Alinks%20" + varTwitQuery);
+		}
+
+      </script>
+	  <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+   </head>
+   <body>
+      <div class="row">
+         <div class="leftcol">
+			<table>
+				<tr>
+					<td width="110"><input type="text" id="txtPrice" size="5" /> price</th>
+					<td width="90"></th>
+					<td rowspan="3" width="135" valign="top">
+						<a href="https://coinmarketcap.com/">coinmarketcap<a/><br />
+						<a href="https://www.tradingview.com/">tradingview<a/><br />
+						<a href="https://coinwink.com//">coinwink<a/><br />
+						</th>
+					<td rowspan="3" width="90" valign="top">
+						<a href="https://www.binance.com/">binance<a/><br />
+						<a href="https://www.kucoin.com/">kucoin<a/><br />
+						<a href="https://www.gdax.com/">gdax<a/><br />
+						</th>
+					<td rowspan="3" width="80" valign="top">
+						<a href="https://www.twitch.tv/cryptoworldnews">twitch<a/><br />
+						<a href="https://discordapp.com/">discord<a/><br />
+						<a href="https://web.telegram.org/">telegram<a/><br />
+						</th>
+				</tr>
+				<tr>
+					<td><input type="text" id="txtStopPer" size="5" value="1" /> stop</td>
+					<td><div id="resStop"></td>
+				</tr>
+				<tr>
+					<td><input type="text" id="txtTakePer" size="5" value="1.9" /> take</td>
+					<td><div id="resTake"></td>
+				</tr>
+				<tr>
+					<td><button id="btnCalc">calc</button><br /><br /></td>
+					<td></td>
+					<td colspan="3">
+					<input type="text" id="txtTwitQuery" size="15" value="$" /> <button id="butTwitQuery" onclick="twitSearch()">twitter search</button>
+					<script>
+					var input = document.getElementById("txtTwitQuery");
+					input.addEventListener("keyup", function(event) {
+						event.preventDefault();
+						if (event.keyCode === 13)
+						{
+							document.getElementById("butTwitQuery").click();
+						}
+					});
+					</script>
+					</td>
+				</tr>
+			</table>
+            <script type="text/javascript">
+               new TradingView.widget({
+               	"autosize": false,
+               	"width": "550",
+               	"height": "400",
+               	"symbol": "COINBASE:BTCEUR",
+               	"interval": "15",
+               	"timezone": "Europe/London",
+               	"theme": "White",
+               	"style": "1",
+               	"locale": "en",
+               	"toolbar_bg": "",
+               	"enable_publishing": false,
+               	"hideideas": true,
+               	"studies": [
+               		"BB@tv-basicstudies",
+               		"MACD@tv-basicstudies",
+               		"RSI@tv-basicstudies"
+               	]
+               }
+               		      );
+            </script>
+            </script>
+            <script type="text/javascript">
+               new TradingView.widget({
+                 "autosize": false,
+                 "width": "550",
+                 "height": "400",
+                 "symbol": "COINBASE:ETHEUR",
+                 "interval": "15",
+                 "timezone": "Europe/London",
+                 "theme": "White",
+                 "style": "1",
+                 "locale": "en",
+                 "toolbar_bg": "",
+                 "enable_publishing": false,
+                 "hideideas": true,
+                 "studies": [
+                   "BB@tv-basicstudies",
+                   "MACD@tv-basicstudies",
+                   "RSI@tv-basicstudies"
+                 ]
+               }
+                                     );
+            </script>
+            <script type="text/javascript">
+               new TradingView.widget({
+                 "autosize": false,
+                 "width": "550",
+                 "height": "400",
+                 "symbol": "COINBASE:LTCEUR",
+                 "interval": "15",
+                 "timezone": "Europe/London",
+                 "theme": "White",
+                 "style": "1",
+                 "locale": "en",
+                 "toolbar_bg": "",
+                 "enable_publishing": false,
+                 "hideideas": true,
+                 "studies": [
+                   "BB@tv-basicstudies",
+                   "MACD@tv-basicstudies",
+                   "RSI@tv-basicstudies"
+                 ]
+               }
+                                     );
+            </script>
+			<br />
+			<img src="bullcandles.png">
+			<br />
+			<br />
+			<img src="bearcandles.png">
+			<br />
+			<br />
+			<img src="patterns.png">
+			<br />
+			<br />
+			<img src="triangles.png">
+			<br />
+			<br />
+			<img src="elliotwave.png">
+			<br />
+			<br />
+			<img src="elliotwaveabc.png">			
+         </div>
+         <div class="rightcol">
+            <a class="twitter-timeline" data-width="375" href="https://twitter.com/Riceyo/lists/crypto"></a><script async src="twitter.js" charset="utf-8"></script>
+				<br />
+         </div>
+      </div>
+   </body>
+</html>
