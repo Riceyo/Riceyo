@@ -1,6 +1,9 @@
 <body>
 
     <head>
+		<title>
+			Jaylen Run
+		</title>
         <style>
             body{
             background-image: url('background.gif');
@@ -8,15 +11,51 @@
             background-repeat: no-repeat;
             overflow: hidden;
             }
+			
+			.strokeme {
+  color: black;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+			
         </style>
     </head>
 
-    <div style="position: relative;">
-		<canvas id="canvasJaylen" width="100%" height="100%" style="position: absolute; left: 0; top: 0;"></canvas>
-        <canvas id="canvasItem" width="100%" height="100%" style="position: absolute; left: 0; top: 0;"></canvas>        
-    </div>
+	<body>
+		<div style="position: relative;">
+			<canvas id="canvasLogo" width="100%" height="100%" style="position: absolute; left: 0; top: 0;"></canvas>		
+			<canvas id="canvasJaylen" width="100%" height="100%" style="position: absolute; left: 0; top: 0;"></canvas>
+			<canvas id="canvasItem" width="100%" height="100%" style="position: absolute; left: 0; top: 0;"></canvas>
+			<canvas id="canvasScore" width="100%" height="100%" class="strokeme" style="position: absolute; left: 0; top: 0;"></canvas>			
+		</div>
+	</body>
 
-    <script>
+	<script>
+	
+		var itemMovingX = 0;
+		var score = 0;
+
+		music = document.createElement("audio");
+		music.src = "music.mp3";
+		music.volume = 0.1;
+
+		jump = document.createElement("audio");
+		jump.src = "jump.mp3";
+		jump.volume = 0.1;
+		
+		collect = document.createElement("audio");
+		collect.src = "collect.mp3";
+		collect.volume = 0.5;
+
+		var canvasLogo = document.getElementById("canvasLogo");
+		var contextLogo = canvasLogo.getContext('2d');
+		canvasLogo.width = window.innerWidth;
+		canvasLogo.height = window.innerHeight;
+		
+		logo = new Image();
+		logo.src = "logo.png";
+		logo.onload = function() {
+			contextLogo.drawImage(logo, 20, 20);
+		};
 		
 		var canvasJaylen = document.getElementById("canvasJaylen");
 		var contextJaylen = canvasJaylen.getContext('2d');
@@ -28,10 +67,20 @@
 		canvasItem.width = window.innerWidth;
 		canvasItem.height = window.innerHeight;
 		
+		var canvasScore = document.getElementById("canvasScore");
+		var contextScore = canvasScore.getContext('2d');
+		canvasScore.width = window.innerWidth;
+		canvasScore.height = window.innerHeight;
+		contextScore.font = "bold 40px Comic Sans MS";
+		contextScore.fillStyle = 'yellow';
+		contextScore.strokeStyle = 'black';
+		contextScore.fillText(score, 500, innerHeight - 50);
+		contextScore.strokeText(score, 500, innerHeight - 50);
+
 		var jaylen = ['jaylenstand.png', 'jaylenrun1.png', 'jaylenrun2.png'];		
         var frame = 0;        
         var frames = [];
-        
+
         function jaylenRun(go) {
 			if (go = 1) {
 				for (var loop = 0; loop < jaylen.length; loop++) {
@@ -44,21 +93,23 @@
 				frames[loop].src = "#";
 			}
 		};
-		        
+
         function jaylenAnimate () {
 			contextJaylen.clearRect(0, 0, canvasJaylen.width, canvasJaylen.height);
 			contextJaylen.drawImage(frames[frame], 150, window.innerHeight / 1.40);
 			frame = (frame + 1) % frames.length;
 		};
-		
+
 		jaylenRun(1);
-		
+
 		function sleep(ms) {
 			return new Promise(resolve => setTimeout(resolve, ms));
 		};
-		
+
 		async function jaylenJump() {
 			//jaylenRun(0);
+			music.play();
+			jump.play();
 			contextJaylen.clearRect(0, 0, canvasJaylen.width, canvasJaylen.height);
             contextJaylen.drawImage(frames[frame], 150, window.innerHeight / 1.45);
 			frame = (frame + 1) % frames.length;
@@ -75,16 +126,25 @@
             contextJaylen.drawImage(frames[frame], 150, window.innerHeight / 1.60);
 			frame = (frame + 1) % frames.length;
 			await sleep(25);
+			console.log(itemMovingX);
+			if (itemMovingX > 50 && itemMovingX < 185) {
+				collect.play();
+				score++;
+				contextScore.clearRect(0, 0, canvasJaylen.width, canvasJaylen.height);
+				contextScore.fillText(score, 500, innerHeight - 50);
+				contextScore.strokeText(score, 500, innerHeight - 50);
+			}
 			//jaylenRun(1);
            };
-        
-        window.addEventListener('keydown', onkeypress, true);
-        
-        function onkeypress(evt) {
+
+        window.addEventListener('click', jaylenJump);
+
+		window.addEventListener('keydown', onKeyPress, true);
+
+        async function onKeyPress(evt) {
 			switch (evt.keyCode) {
 				case 32:
 					jaylenJump();
-					break;
 			}
 		};	
 
@@ -107,15 +167,15 @@
 			var randomIndex = Math.floor(Math.random() * itemImages.length);
 			itemImage.src = itemImages[randomIndex];
 			var itemX = window.innerWidth;
-			var itemY = window.innerHeight - (window.innerHeight / 100 * 50);
+			var itemY = window.innerHeight - (window.innerHeight / 100 * 45);
 			var itemSpeed = 0;
 			
 			function itemAnimate() {
 				requestAnimationFrame(itemAnimate);
 				itemSpeed += 12;
-				var newX = itemX - itemSpeed;
+				itemMovingX = itemX - itemSpeed;
 				contextItem.clearRect(0, 0, canvasItem.width, canvasItem.height);
-				contextItem.drawImage(itemImage, newX, itemY);
+				contextItem.drawImage(itemImage, itemMovingX, itemY);
 			};
         
         };
